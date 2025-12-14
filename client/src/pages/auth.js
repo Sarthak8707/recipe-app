@@ -31,6 +31,7 @@ const Login = () => {
     })
     console.log(response);
     setCookies("access_token", response.data.token);
+    //console.log(response.data.token);
     window.localStorage.setItem("userID", response.data.userID);
     navigate("/");
     }

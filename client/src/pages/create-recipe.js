@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-//import {useCookies} from "react-cookie"
+import {useCookies} from "react-cookie"
 
 const CreateRecipe = () => {
   const [recipe, setRecipe] = useState({
@@ -10,6 +10,7 @@ const CreateRecipe = () => {
     cookingTime: 0,
     imageUrl: ""
   });
+  const [cookies, _] = useCookies(["access_token"])
 
   const handleChange = (event) => {
     const {name, value} = event.target;
@@ -24,7 +25,7 @@ const CreateRecipe = () => {
   const handleSubmit =async (e) => {
     
     e.preventDefault()
-    try{const response = await axios.post("http://localhost:3001/recipes", recipe)
+    try{const response = await axios.post("http://localhost:3001/recipes", recipe, {headers: {authorization: cookies.access_token}})
    console.log(response)
    }
     catch(err){
